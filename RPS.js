@@ -12,25 +12,29 @@ function getComputerChoice() {
     }
     return computerOption; 
 }
-let computerChoice = getComputerChoice().toLowerCase(); //store the option in a variable
+ //store the option in a variable, make it lower case for easy comparisons
 
 //prompt the user for input and store it in a variable
 
 function getUserChoice() {
-  return userChoice = prompt("Rock, paper or scissors?");
+  userChoice = prompt("Rock, paper or scissors?");
+  if (userChoice === null) {
+    alert("You quit the game! Shame!");
+    return 0;
+  } else { 
+    return userChoice;
+  }
 }
-userChoice = getUserChoice();
+
 
 //make sure the entered word is correct, otherwise keep prompting for input. If user presses cancel - quit the game
-
- while (userChoice.toLowerCase() !== "rock" && userChoice.toLowerCase() !== "paper" && userChoice.toLowerCase() !== "scissors") {
+function checkIfValid() {
+ while (userChoice !== "rock" && userChoice !== "paper" && userChoice !== "scissors") {
   getUserChoice();
-  if (userChoice === null) {
-    alert("You quit the game!");
-    break;
  }
  }
- 
+
+
 
 
  function round(userChoice, computerChoice) {
@@ -47,15 +51,21 @@ userChoice = getUserChoice();
     info = "Scissors lose to rock, you lose!";
   } else if (userChoice === "paper" && computerChoice === "scissors") {
     info = "Paper loses to scissors, you lose!"; 
-  } else {
+  } else { 
     info = "It's a tie!"
   }
   return info;
 }
 
-alert(round(userChoice.toLowerCase(), computerChoice.toLowerCase()));
+let computerChoice;
+let userChoice;
 
-
+for (let i = 0; i <= 4; i++) {
+  computerChoice = getComputerChoice().toLowerCase();
+  userChoice = getUserChoice().toLowerCase();
+  checkIfValid();
+  alert(round(userChoice, computerChoice));
+}
 
 
 
