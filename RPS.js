@@ -12,7 +12,7 @@ function getComputerChoice() {
     }
     return computerOption; 
 }
-let computerChoice = getComputerChoice(); //store the option in a variable
+let computerChoice = getComputerChoice().toLowerCase(); //store the option in a variable
 
 //prompt the user for input and store it in a variable
 
@@ -35,17 +35,17 @@ userChoice = getUserChoice();
 
  function round(userChoice, computerChoice) {
   let info;
-  if (userChoice.toLowerCase() === "rock" && computerChoice.toLowerCase() === "scissors") {
+  if (userChoice === "rock" && computerChoice === "scissors") {
     info = "Rock beats scissors, you win!";
-  } else if (userChoice.toLowerCase() === "scissors" && computerChoice.toLowerCase() === "paper") {
+  } else if (userChoice === "scissors" && computerChoice === "paper") {
     info = "Scissors beat paper, you win!";
-  } else if (userChoice.toLowerCase() === "paper" && computerChoice.toLowerCase() === "rock") {
+  } else if (userChoice === "paper" && computerChoice === "rock") {
     info = "Paper beats rock, you win!";
-  } else if (userChoice.toLowerCase() === "rock" && computerChoice.toLowerCase() === "paper") {
+  } else if (userChoice === "rock" && computerChoice === "paper") {
     info = "Rock loses to paper, you lose!";
-  } else if (userChoice.toLowerCase() === "scissors" && computerChoice.toLowerCase() === "rock") {
+  } else if (userChoice === "scissors" && computerChoice === "rock") {
     info = "Scissors lose to rock, you lose!";
-  } else if (userChoice.toLowerCase() === "paper" && computerChoice.toLowerCase() === "scissors") {
+  } else if (userChoice === "paper" && computerChoice === "scissors") {
     info = "Paper loses to scissors, you lose!"; 
   } else {
     info = "It's a tie!"
@@ -53,7 +53,7 @@ userChoice = getUserChoice();
   return info;
 }
 
-alert(round(userChoice, computerChoice));
+alert(round(userChoice.toLowerCase(), computerChoice.toLowerCase()));
 
 
 
