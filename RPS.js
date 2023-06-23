@@ -35,8 +35,6 @@ function checkIfValid() {
  }
 
 
-
-
  function round(userChoice, computerChoice) {
   let info;
   if (userChoice === "rock" && computerChoice === "scissors") {
@@ -52,20 +50,42 @@ function checkIfValid() {
   } else if (userChoice === "paper" && computerChoice === "scissors") {
     info = "Paper loses to scissors, you lose!"; 
   } else { 
-    info = "It's a tie!"
+    info = "Same!"
   }
   return info;
 }
 
 let computerChoice;
 let userChoice;
+let score = 0;
 
+function selectWinner() {
+  if (round(userChoice, computerChoice).match("win")) {
+    score++;
+  } else if (round(userChoice, computerChoice).match("lose")) {
+    score--;
+  }
+  return score;
+}
+
+// loop 5 times to play 5 rounds of the game
 for (let i = 0; i <= 4; i++) {
   computerChoice = getComputerChoice().toLowerCase();
   userChoice = getUserChoice().toLowerCase();
   checkIfValid();
   alert(round(userChoice, computerChoice));
-}
+  selectWinner();
+} 
+
+//score and winner calculation and announcement
+alert (`Your score is ${score}`);
+if (score > 0) {
+  alert("You won the game, congratulations!")
+  } else if (score < 0) {
+    alert("Unfortunately you lost, try again")
+  } else {
+    alert("It's a tie! Play again!")     
+  }
 
 
 
