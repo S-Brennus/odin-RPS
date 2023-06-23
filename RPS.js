@@ -3,18 +3,18 @@
 function getComputerChoice() {
   let computerOption;
   let randomNumber = Math.floor(Math.random() * 3 + 1); //randomly generate a number from 1 to 3
-    if (randomNumber === 1) { //assign generated number to a certain option
+    if (randomNumber === 1) { //assign generated number to a certain option - either rock, paper or scissors
      computerOption = "Rock";
     } else if (randomNumber === 2) {
      computerOption = "Paper";
     } else {
      computerOption = "Scissors";
     }
-    return computerOption; 
+    return computerOption; //return the choice, can be stored in a variable later
 }
- //store the option in a variable, make it lower case for easy comparisons
+ 
 
-//prompt the user for input and store it in a variable
+//prompt the user for input, if the user presses cancel - announce it and stop execution.
 
 function getUserChoice() {
   userChoice = prompt("Rock, paper or scissors?");
@@ -50,26 +50,31 @@ function checkIfValid() {
   } else if (userChoice === "paper" && computerChoice === "scissors") {
     info = "Paper loses to scissors, you lose!"; 
   } else { 
-    info = "Same!"
+    info = "It's a tie!"
   }
   return info;
 }
 
 let computerChoice;
 let userChoice;
-let score = 0;
 
-function selectWinner() {
-  if (round(userChoice, computerChoice).match("win")) {
-    score++;
-  } else if (round(userChoice, computerChoice).match("lose")) {
-    score--;
-  }
-  return score;
+let playerScore = { //could have done it with just regular values, no object creation was necessary
+  user : 0,
+  ai : 0
 }
 
-// loop 5 times to play 5 rounds of the game
-for (let i = 0; i <= 4; i++) {
+function selectWinner() { //calculate score after the round is over
+ 
+  if (round(userChoice, computerChoice).match("win")) {
+    playerScore.user++;
+  } else if (round(userChoice, computerChoice).match("lose")) {
+    playerScore.ai++;
+  }
+  return;
+}
+
+// the main which includes all functions together. Loop for as long as it takes, until one side is a winner 3 times
+while (playerScore.user !== 3 && playerScore.ai !== 3) {
   computerChoice = getComputerChoice().toLowerCase();
   userChoice = getUserChoice().toLowerCase();
   checkIfValid();
@@ -78,11 +83,11 @@ for (let i = 0; i <= 4; i++) {
 } 
 
 //score and winner calculation and announcement
-alert (`Your score is ${score}`);
-if (score > 0) {
-  alert("You won the game, congratulations!")
-  } else if (score < 0) {
-    alert("Unfortunately you lost, try again")
+alert (`Your score is ${playerScore.user}, computer's score is ${playerScore.ai}`);
+if (playerScore.user === 3) {
+  alert("Victory!")
+  } else if (playerScore.ai === 3) {
+    alert("Defeat!")
   } else {
     alert("It's a tie! Play again!")     
   }
