@@ -1,0 +1,42 @@
+body {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(85, 72, 72)
+}
+
+.buttons {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 35px;
+    margin: 20px;
+
+}
+
+.rock, .paper, .scissors {
+    background-color:black;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+button:active {
+    background-color: green;
+    color:white;
+}
+
+button:hover {
+    background-color: white;
+    color:black;
+}
+
+h1 {
+    color: rgb(158, 158, 158);
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
