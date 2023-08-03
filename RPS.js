@@ -1,5 +1,22 @@
-// function to generate computer option
+//declarations
+let userChoice;
+let computerChoice;
 
+let playerScore = { //playerscore tracker
+  user : 0,
+  ai : 0
+}
+
+const mainDiv = document.querySelector('.main');
+const bodySelector = document.querySelector('body');
+const playRound = document.querySelector('.play');
+const h1 = document.querySelector('h1');
+const h2 = document.querySelector('h2');
+const buttons = document.querySelector('.buttons');
+const score = document.querySelector('.score');
+const reset = document.querySelector('.reset');
+
+// function to generate computer option
 function getComputerChoice() {
   let computerChoice;
   let randomNumber = Math.floor(Math.random() * 3 + 1); //randomly generate a number from 1 to 3
@@ -13,34 +30,7 @@ function getComputerChoice() {
     return computerChoice; //return the choice, can be stored in a variable later
 }
  
-/*
-//prompt the user for input, if the user presses cancel - announce it and stop execution.
-
-function getUserChoice() {
-  userChoice = prompt("Rock, paper or scissors?");
-  if (userChoice === null) {
-    alert("You quit the game! Shame!");
-    return 0;
-  } else { 
-    return userChoice;
-  }
-}
-
-
-//keep prompting if the word entered does not match rock, paper or scissors
-function checkIfValid() {
- while (userChoice !== "rock" && userChoice !== "paper" && userChoice !== "scissors") {
-  getUserChoice();
- }
- }
-
-*/
-
-let playerScore = { //object with players
-  user : 0,
-  ai : 0
-}
-
+//provides both info and updates the score
  function round(userChoice, computerChoice) {
   let info;
   if (userChoice === "rock" && computerChoice === "scissors") {
@@ -66,57 +56,50 @@ let playerScore = { //object with players
   }
   return info;
 }
-/*
-let computerChoice;
-let userChoice;
-*/
 
-/*
-// the main loop, which includes all functions together. Loop for as long as it takes, until one side wins 3 times
-while (playerScore.user !== 3 && playerScore.ai !== 3) {
-  computerChoice = getComputerChoice();
-  userChoice = getUserChoice().toLowerCase();
-  checkIfValid();
-  alert(round(userChoice, computerChoice));
-  selectWinner();
-} 
-
-*/ 
-
-//score and winner calculation and announcement
-
-
-
-
-
-  const mainDiv = document.querySelector('.main');
-  const winnerAnnounce = document.createElement('div');
-  winnerAnnounce.style.cssText = 'text-align:center; color: white;'
-  winnerAnnounce.classList.add('winner-announce');
-  winnerAnnounce.textContent = "Press any button to play!";
-  mainDiv.appendChild(winnerAnnounce);
-
-  const score = document.createElement('div')
-  score.classList.add('score');
-  score.style.cssText = 'text-align:center; color: white;'
-  score.textContent = 'Your score will be displayed here';
-  mainDiv.appendChild(score);
-  
   function roundWinner() {
-    winnerAnnounce.textContent = round(userChoice, computerChoice);
+    playRound.textContent = round(userChoice, computerChoice);
+    if (score.style.display === "none") {
+      score.style.display = "initial";
+    }
     score.textContent = `Your score: ${playerScore.user}, AI score: ${playerScore.ai}`;
   }
+
+  function victory() {
+    h1.textContent = "Victory!";
+    h2.textContent = "Evil machines are beaten";
+    buttons.style.display = "none";
+    mainDiv.style.display = "none";
+    restart.style.display = "none";
+    reload();
+  }
+
+  function defeat() {
+    h1.textContent = "Defeat!";
+    h2.textContent = "Evil machines have taken over the world!";
+    buttons.style.display = "none";
+    mainDiv.style.display = "none";
+    restart.style.display = "none";
+    reload();
+  }
+
   function gameResult() {
-    if (playerScore.user === 3) {
-      alert("You have won the game");
-      location.reload();
-    } else if (playerScore.ai === 3) {
-      alert("Machines have taken over the world!");
-      location.reload();
+    if (playerScore.user === 5) {
+     victory();
+    } else if (playerScore.ai === 5) {
+     defeat();
     }
   }
-let userChoice;
-let computerChoice;
+//adds a reload button after victory and defeat, reloads the page
+  function reload() {
+    const reload = document.createElement("button");
+    reload.textContent = "Play again?";
+    reset.appendChild(reload);
+    reload.addEventListener('click', () => {
+     location.reload();
+    })
+  }
+
 
 const rockBtn = document.querySelector('.rock');
 rockBtn.addEventListener('click', () => {
@@ -140,4 +123,13 @@ scissorsBtn.addEventListener('click', () => {
   computerChoice = getComputerChoice();
   roundWinner();
   gameResult();
+});
+
+//restart button
+const restart = document.querySelector('.restart');
+restart.addEventListener('click', () => {
+  playerScore.user = 0;
+  playerScore.ai = 0;
+  playRound.textContent = "Press any button to play!";
+  score.style.display = "none";
 });

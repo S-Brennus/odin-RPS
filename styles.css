@@ -1,42 +1,71 @@
 body {
-    display:flex;
+    display: flex;
     flex-direction: column;
+    margin: 0;
+    padding: 0;
+    min-height:100vh;
     justify-content: center;
-    align-items: center;
-    background-color: rgb(85, 72, 72)
+    align-items:center;
+    background-color: #1F2937;
+
 }
 
 .buttons {
     display:flex;
-    align-items:center;
-    justify-content:center;
-    gap: 35px;
-    margin: 20px;
-
+    gap: 40px;
+    text-align:center;
+    padding: 15px;
 }
 
-.rock, .paper, .scissors {
-    background-color:black;
+button {
+    background-color:#3882f6;
     color: white;
     border: none;
     border-radius: 10px;
-}
-button:active {
-    background-color: green;
-    color:white;
+    padding: 10px;
+    width: 85px;
+    font-size: 15px;
 }
 
-button:hover {
-    background-color: white;
-    color:black;
+button:active { 
+    background-color: #e5e7eb;
+    color:#1f2937;
 }
 
 h1 {
-    color: rgb(158, 158, 158);
+    color: #f9faf8;
+    text-align: center;
+    margin: 0;
+    padding: 15px;
+    }
+
+h2 {
+    color: #999999;
+    text-align:center;
+    margin: 0;
+    padding: 15px;
 }
 
 .main {
-    display: flex;
+    display:flex;
     flex-direction: column;
-    gap: 10px;
+    justify-content:center;
+    align-items:center;
+    gap:4px;
+    padding: 10px;
+    height: 45px;
+}
+.play {
+    color: #e5e7eb;
+    font-size: 20px;
+    text-align: center;
+}
+
+.reset {
+    text-align:center;
+    padding: 10px;
+}
+
+.score {
+    color: #e5e7eb;
 }
